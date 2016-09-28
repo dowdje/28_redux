@@ -1,20 +1,21 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { fetchCats } from '../actions'
+import * as actions from '../actions'
 
 function CatNew(props){
-  debugger
   return(
     <div>
-    <form><input /></form>
+      <form onSubmit={props.actions.createCat}>
+        <input type='text'/>
+      </form>
     </div>
   )
 }
  
 
 function mapDispatchToProps(dispatch) {
-  const action = bindActionCreators(fetchCats, dispatch)
+  const action = bindActionCreators(actions, dispatch)
   return {actions: action}
 }
 
