@@ -8,14 +8,11 @@ function CatsIndex (props){
     <div>
       <h2>Welcome to our Cats</h2>
       <div>{props.children}</div>
-      <Link to='/cats/new'>Add a Cat!</Link>
       <div>{
             props.cats.map((cat, index) => {
-              return <li>
-                      <div className='row'>
-                      <Link to={"/cats/" + cat.id}><h3 className='col-md-4'>{cat.name}</h3></Link>
+              return <div className='row'>
+                      <Link to={"/cats/" + cat.id}><h4 className='col-md-4'>{cat.name}</h4></Link>
                      </div>
-                     </li>
               })
             }
       </div>

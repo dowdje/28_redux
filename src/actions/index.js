@@ -7,19 +7,39 @@ export function fetchDogs(){
 }
 
 export function fetchCats(){
-  const cats =[{id:1, name:'pieceboy', personality:'bastard', gifUrl:"http://thecatapi.com/api/images/get?format=src&type=gif"},{id: 2, name: 'weenybear', gifUrl:"http://thecatapi.com/api/images/get?format=src&type=gif"}, {id: 3, name: 'olebddyolepal', gifUrl:"http://thecatapi.com/api/images/get?format=src&type=gif"}]
-  return{
-    type:'FETCH_CATS',
+  const cats = fetch('http://localhost:3000/api/v1/cats').then( response => {
+    return response.json()
+  }).then(cats => {
+    return cats
+  })
+
+  return {
+    type: 'FETCH_CATS',
     payload: cats
   }
 }
 
-export function createCat(event){
-  event.preventDefault()
-  let kitty = event.target.firstChild.value
-  event.target.firstChild.value = ''
+export function createCat(newCat){
+  let kitty = newCat
+  let url = 'http://localhost:3000/api/v1/cats'
+  const CatGuy = fetch(url, {  
+    method: 'post',  
+    headers: {  
+      'Accept': 'application/json',
+      "Content-type": "application/json"  
+    },  
+    body: JSON.stringify({cat:  kitty}) 
+  }).then(response => {
+    return response.json()
+  }).then(cat =>{
+    return cat
+  })
+  return {type: 'CREATE_CAT', payload: CatGuy}
+} 
+
+export function killCat(catId){
   return {
-    type:'CREATE_CAT',
-    payload: {cat: { name: kitty}}
+    type: 'KILL_CAT',
+    payload: {id: catId}
   }
 }
