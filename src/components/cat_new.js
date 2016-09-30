@@ -12,7 +12,7 @@ function CatNew(props){
     </div>
   )
 }
- 
+
 
 function mapDispatchToProps(dispatch) {
   const action = bindActionCreators(actions, dispatch)
